@@ -31,7 +31,7 @@ el <a href="http://www.denisowski.org/Esperanto/ESPDIC/espdic_readme.htm">ESPDIC
 </div>
 
 <div class="container">
-<form class="form-horizontal">
+<form id="translateForm" class="form-horizontal">
 <input type="text" id="wordInput" class="form-control">
 <button type="button" id="enButton" class="btn btn-primary">Angla</button>
 <button type="button" id="eoButton" class="btn btn-primary">Esperanto</button>
@@ -53,7 +53,8 @@ el <a href="http://www.denisowski.org/Esperanto/ESPDIC/espdic_readme.htm">ESPDIC
 <script src="js/bootstrap.min.js"></script>
 
 <script>
-$('#enButton').on('click', function() {
+$('#translateForm').submit(function(e) {
+	e.preventDefault();
 	var word = $('#wordInput').val();
 	var url = document.location.origin + '/en/' + word;
 	window.location.replace(url);
