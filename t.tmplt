@@ -56,13 +56,24 @@ el <a href="http://www.denisowski.org/Esperanto/ESPDIC/espdic_readme.htm">ESPDIC
 $('#translateForm').submit(function(e) {
 	e.preventDefault();
 	var word = $('#wordInput').val();
-	var url = document.location.origin + '/en/' + word;
-	window.location.replace(url);
+	if (word != "") {
+		var url = document.location.origin + '/en/' + word;
+		window.location.replace(url);
+	}
+})
+$('#enButton').on('click', function() {
+	var word = $('#wordInput').val();
+	if (word != "") {
+		var url = document.location.origin + '/en/' + word;
+		window.location.replace(url);
+	}
 })
 $('#eoButton').on('click', function() {
 	var word = $('#wordInput').val();
-	var url = document.location.origin + '/eo/' + word;
-	window.location.replace(url);
+	if (word != "") {
+		var url = document.location.origin + '/eo/' + word;
+		window.location.replace(url);
+	}
 })
 </script>
 </body>
