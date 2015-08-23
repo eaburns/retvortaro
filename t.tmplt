@@ -21,31 +21,34 @@
 
 <body>
 <div class="container">
-<p>Bonvenon al retvortaro.appspot.com.<p>
-<p>
-Nun servas
-{{len .ToEn}} Esperantanj vortonj
-kaj {{len .ToEo}} Anglanj vortonj
-el <a href="http://www.denisowski.org/Esperanto/ESPDIC/espdic_readme.htm">ESPDICT</a>.
-</p>
+
+<div class="page-header">
+<h1>Bonvenon al retvortaro.appspot.com.</h1>
 </div>
 
-<div class="container">
-<form id="translateForm" class="form-horizontal">
+<div>
+<form id="translateForm">
 <input type="text" id="wordInput" class="form-control">
-<button type="button" id="enButton" class="btn btn-primary">Angla</button>
-<button type="button" id="eoButton" class="btn btn-primary">Esperanto</button>
+<button type="button" id="enButton" class="btn btn-primary">al Angla</button>
+<button type="button" id="eoButton" class="btn btn-primary">al Esperanto</button>
 </form>
 </div>
 
 {{if .Word}}
-<div class="container">
-<p>
-{{.Word}}:
-{{if .Translation}} {{.Translation}} {{else}} <em>Nenio trovitas</em>{{end}}
-</p>
+<div>
+<dl>
+<dt>{{.Word}}</dt>
+<dd>{{if .Translation}} {{.Translation}} {{else}} <em>Nenio trovitas</em>{{end}}</dd>
+<dl>
 </div>
 {{end}}
+
+<footer>
+Nun servas
+{{len .ToEn}} Esperantanj vortonj
+kaj {{len .ToEo}} Anglanj vortonj
+el <a href="http://www.denisowski.org/Esperanto/ESPDIC/espdic_readme.htm">ESPDICT</a>.
+</footer>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -76,5 +79,7 @@ $('#eoButton').on('click', function() {
 	}
 })
 </script>
+
+</div>
 </body>
 </html>
