@@ -1,0 +1,36 @@
+<!doctype html public "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Retvortaro</title>
+</head>
+
+<body>
+
+<div>
+<p>Bonvenon al retvortaro.appspot.com.<p>
+<p>
+Nun servas
+{{len .ToEn}} Esperantanj vortonj
+kaj {{len .ToEo}} Anglanj vortonj
+el <a href="http://www.denisowski.org/Esperanto/ESPDIC/espdic_readme.htm">ESPDICT</a>.
+</p>
+</div>
+
+<div>
+<form method="post">
+<input type="text" name="text">
+<input type="submit" formaction="/en" value="Angla">
+<input type="submit" formaction="/eo" value="Esperanto">
+</form>
+</div>
+
+{{if .Word}}
+<div>
+{{.Word}}:
+{{if .Translation}} {{.Translation}} {{else}} <em>Nenio trovitas</em>{{end}}
+</div>
+{{end}}
+
+
+</body>
+</html>
