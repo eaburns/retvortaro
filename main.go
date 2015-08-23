@@ -114,12 +114,12 @@ func loadWords() {
 		eo := strings.TrimSpace(fs[0])
 		eoLow := strings.ToLower(eo)
 		en := strings.TrimSpace(fs[1])
-		enLow := strings.ToLower(en)
 
 		page.ToEn[eoLow] = en
 
 		for _, en := range strings.Split(en, ",") {
 			en = strings.TrimSpace(en)
+			enLow := strings.ToLower(en)
 			if cur := page.ToEo[enLow]; len(cur) > 0 {
 				page.ToEo[enLow] = cur + ", " + eo
 			} else {
