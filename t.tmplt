@@ -1,12 +1,26 @@
-<!doctype html public "-//W3C//DTD HTML 4.01//EO" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="eo">
+
 <head>
-<title>Retvortaro</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Bonvenon al Retvortaro</title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 </head>
 
 <body>
-
-<div>
+<div class="container">
 <p>Bonvenon al retvortaro.appspot.com.<p>
 <p>
 Nun servas
@@ -16,21 +30,39 @@ el <a href="http://www.denisowski.org/Esperanto/ESPDIC/espdic_readme.htm">ESPDIC
 </p>
 </div>
 
-<div>
-<form method="post">
-<input type="text" name="text">
-<input type="submit" formaction="/en" value="Angla">
-<input type="submit" formaction="/eo" value="Esperanto">
+<div class="container">
+<form class="form-horizontal">
+<input type="text" id="wordInput" class="form-control">
+<button type="button" id="enButton" class="btn btn-primary">Angla</button>
+<button type="button" id="eoButton" class="btn btn-primary">Esperanto</button>
 </form>
 </div>
 
 {{if .Word}}
-<div>
+<div class="container">
+<p>
 {{.Word}}:
 {{if .Translation}} {{.Translation}} {{else}} <em>Nenio trovitas</em>{{end}}
+</p>
 </div>
 {{end}}
 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
 
+<script>
+$('#enButton').on('click', function() {
+	var word = $('#wordInput').val();
+	var url = document.location.origin + '/en/' + word;
+	window.location.replace(url);
+})
+$('#eoButton').on('click', function() {
+	var word = $('#wordInput').val();
+	var url = document.location.origin + '/eo/' + word;
+	window.location.replace(url);
+})
+</script>
 </body>
 </html>

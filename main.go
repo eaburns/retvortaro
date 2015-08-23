@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"os"
+	"path"
 	"strings"
 )
 
@@ -26,8 +27,8 @@ var (
 func init() {
 	load()
 	http.HandleFunc("/", indexHandler)
-	http.HandleFunc("/en", enHandler)
-	http.HandleFunc("/eo", eoHandler)
+	http.HandleFunc("/en/", enHandler)
+	http.HandleFunc("/eo/", eoHandler)
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
@@ -37,14 +38,21 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func enHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
-		http.Error(w, "", http.StatusMethodNotAllowed)
-		return
-	}
 	p := page
-	p.Word = fixEo(r.PostFormValue("text"))
+	p.Word = fixEo(path.Base(r.URL.Path))
 	if p.Word != "" {
 		p.Translation = page.ToEn[strings.ToLower(p.Word)]
+	}
+	if err := tmplt.ExecuteTemplate(w, tmpltFile, p); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func eoHandler(w http.ResponseWriter, r *http.Request) {
+	p := page
+	p.Word = path.Base(r.URL.Path)
+	if p.Word != "" {
+		p.Translation = page.ToEo[strings.ToLower(p.Word)]
 	}
 	if err := tmplt.ExecuteTemplate(w, tmpltFile, p); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -84,21 +92,6 @@ func fixEo(word string) string {
 		}
 	}
 	return word
-}
-
-func eoHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
-		http.Error(w, "", http.StatusMethodNotAllowed)
-		return
-	}
-	p := page
-	p.Word = r.PostFormValue("text")
-	if p.Word != "" {
-		p.Translation = page.ToEo[strings.ToLower(p.Word)]
-	}
-	if err := tmplt.ExecuteTemplate(w, tmpltFile, p); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
 }
 
 func load() {
