@@ -34,11 +34,13 @@
 </form>
 </div>
 
-{{if .Word}}
+{{if .Translations}}
 <div>
 <dl>
-<dt>{{.Word}}</dt>
-<dd>{{if .Translation}} {{.Translation}} {{else}} <em>Nenio trovitas</em>{{end}}</dd>
+{{range .Translations}}
+<dt>{{.From}}</dt>
+<dd>{{if .To}} {{.To}} {{else}} <em>Nenio trovitas</em>{{end}}</dd>
+{{end}}
 <dl>
 </div>
 {{end}}
