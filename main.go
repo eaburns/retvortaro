@@ -96,7 +96,7 @@ func fixX(word string) string {
 		{"Gx", "Ĝ"},
 		{"hx", "ĥ"},
 		{"Hx", "Ĥ"},
-		{"ox", "ĵ"},
+		{"jx", "ĵ"},
 		{"Jx", "Ĵ"},
 		{"sx", "ŝ"},
 		{"Sx", "Ŝ"},
