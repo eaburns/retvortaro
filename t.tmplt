@@ -23,13 +23,13 @@
 <div class="container">
 
 <div class="page-header">
-<h1>Bonvenon al retvortaro.appspot.com.</h1>
+<h1>Bonvenon al Retvortaro</h1>
 </div>
 
 <div>
 <form id="translateForm">
 <input type="text" id="wordInput" class="form-control">
-<button type="button" id="enButton" class="btn btn-primary">al Angla</button>
+<button type="button" id="enButton" class="btn btn-primary">al la angla</button>
 <button type="button" id="eoButton" class="btn btn-primary">al Esperanto</button>
 </form>
 </div>
@@ -43,13 +43,17 @@
 {{end}}
 <dl>
 </div>
+{{else}}
+<br>
 {{end}}
 
 <footer>
-Nun servas
-{{len .ToEn}} Esperantanj vortonj
-kaj {{len .ToEo}} Anglanj vortonj
-el <a href="http://www.denisowski.org/Esperanto/ESPDIC/espdic_readme.htm">ESPDICT</a>.
+<p>
+Servante vortojn el
+<a href="http://www.denisowski.org/Esperanto/ESPDIC/espdic_readme.htm">ESPDICT</a>.
+Vidu la fonton kaj raportu erarojn ĉe
+<a href="https://github.com/eaburns/retvortaro">GitHub</a>.
+</p>
 </footer>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
