@@ -10,6 +10,8 @@ import (
 )
 
 type Page struct {
+	Query string
+	Found bool
 	ToEn, ToEo   map[string]string
 	Translations []Translation
 }
@@ -43,7 +45,8 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 func enHandler(w http.ResponseWriter, r *http.Request) {
 	p := page
-	word := fixX(path.Base(r.URL.Path))
+	p.Query = path.Base(r.URL.Path)
+	word := fixX(p.Query)
 	if word != "" {
 		enWord := page.ToEn[strings.ToLower(word)]
 		if enWord == "" {
@@ -59,6 +62,14 @@ func enHandler(w http.ResponseWriter, r *http.Request) {
 			To:   enWord,
 		})
 	}
+
+	for _, t := range p.Translations {
+		if t.To != "" {
+			p.Found = true
+			break
+		}
+	}
+
 	if err := tmplt.ExecuteTemplate(w, tmpltFile, p); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
@@ -66,7 +77,8 @@ func enHandler(w http.ResponseWriter, r *http.Request) {
 
 func eoHandler(w http.ResponseWriter, r *http.Request) {
 	p := page
-	word := path.Base(r.URL.Path)
+	p.Query = path.Base(r.URL.Path)
+	word := p.Query
 	if word != "" {
 		p.Translations = append(p.Translations, Translation{
 			From: word,
@@ -83,6 +95,14 @@ func eoHandler(w http.ResponseWriter, r *http.Request) {
 			})
 		}
 	}
+
+	for _, t := range p.Translations {
+		if t.To != "" {
+			p.Found = true
+			break
+		}
+	}
+
 	if err := tmplt.ExecuteTemplate(w, tmpltFile, p); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

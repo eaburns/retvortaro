@@ -28,7 +28,7 @@
 
 <div>
 <form id="translateForm">
-<input type="text" id="wordInput" class="form-control">
+<input type="text" id="wordInput" class="form-control"{{if .Query}} {{if .Found}}placeholder{{else}}value{{end}}="{{.Query}}"{{end}}>
 <button type="button" id="enButton" class="btn btn-primary">al la angla</button>
 <button type="button" id="eoButton" class="btn btn-primary">al Esperanto</button>
 </form>
